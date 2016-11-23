@@ -6,13 +6,13 @@ const url = require('url');
 const config = require('./config');
 
 module.exports = function () {
-    return function(req, res, next) {
-        if(isJs(req)) {
+    return function (req, res, next) {
+        if (isJs(req)) {
             fetch(url.resolve(config.proxyTarget, req.path))
                 .then(res => res.text())
                 .then(txt => {
                     const transformed = babel.transform(txt);
-                    res.set('Content-Type', 'text/plain')
+                    res.set('Content-Type', 'text/plain');
                     res.send(transformed);
                 }).catch(() => {
                 next(); // fallback to proxy
