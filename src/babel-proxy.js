@@ -7,14 +7,14 @@ const config = require('./config');
 
 module.exports = function () {
     return function(req, res, next) {
-        console.log('babel proxy middleware');
         if(isJs(req)) {
             fetch(url.resolve(config.proxyTarget, req.path))
                 .then(res => res.text())
                 .then(txt => {
-                console.log(txt);
-                res.send(babel.transform(txt));
-            }).catch(() => {
+                    const transformed = babel.transform(txt);
+                    res.set('Content-Type', 'text/plain')
+                    res.send(transformed);
+                }).catch(() => {
                 next(); // fallback to proxy
             });
         } else {
