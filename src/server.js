@@ -10,8 +10,8 @@ const config = require('./config');
 
 app.use(cors());
 app.use(cacheControl({
-    browser: 0,
-    server: 15
+    browser: 3600,
+    server: 3600
 }));
 app.use(babelProxy());
 app.use(proxy({
