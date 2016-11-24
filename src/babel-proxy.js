@@ -11,7 +11,7 @@ module.exports = function () {
             fetch(url.resolve(config.proxyTarget, req.path))
                 .then(response => {
                     if(response.status >= 400) {
-                        res.set('Cache-Control', 'max-age=0, s-maxage=0');
+                        invalidateCache(res);
                         return null;
                     }
                     return response.text()
@@ -27,6 +27,7 @@ module.exports = function () {
                     res.set('Content-Type', 'text/plain');
                     res.send(transformed.code);
                 }).catch(() => {
+                invalidateCache(res);
                 console.log('failed to transform', config.proxyTarget, req.path);
                 next(); // fallback to proxy
             });
@@ -35,6 +36,10 @@ module.exports = function () {
         }
     }
 };
+
+function invalidateCache(res) {
+    res.set('Cache-Control', 'max-age=0, s-maxage=0');
+}
 
 function isJs(req) {
     return req.path.endsWith('.js') && req.method === 'GET';
