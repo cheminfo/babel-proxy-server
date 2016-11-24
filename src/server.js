@@ -3,11 +3,16 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const cacheControl = require('./cacheControl');
 const babelProxy = require('./babel-proxy');
 const proxy = require('http-proxy-middleware');
 const config = require('./config');
 
 app.use(cors());
+app.use(cacheControl({
+    browser: 0,
+    server: 15
+}));
 app.use(babelProxy());
 app.use(proxy({
     target: config.proxyTarget,
