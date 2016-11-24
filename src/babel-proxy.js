@@ -14,9 +14,11 @@ module.exports = function () {
                     const transformed = babel.transform(txt, {
                         presets: ['es2017']
                     });
+                    console.log('transformed', config.proxyTarget, req.path);
                     res.set('Content-Type', 'text/plain');
                     res.send(transformed);
                 }).catch(() => {
+                console.log('failed to transform', config.proxyTarget, req.path);
                 next(); // fallback to proxy
             });
         } else {
