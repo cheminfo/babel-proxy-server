@@ -9,15 +9,19 @@ module.exports = function () {
     return function (req, res, next) {
         if (isJs(req)) {
             fetch(url.resolve(config.proxyTarget, req.path))
-                .then(res => res.text())
+                .then(response => {
+                    if(response.status >= 400) {
+                        res.set('Cache-Control', 'max-age=0, s-maxage=0');
+                        return null;
+                    }
+                    return response.text()
+                })
                 .then(txt => {
+                    if(txt === null) return next();
                     const transformed = babel.transform(txt, {
                         presets: ['es2017'],
                         minified: false,
                         ast: false
-                        // evaluate: true,
-                        // babili: false,
-                        // lineWrap: false
                     });
                     console.log('transformed', config.proxyTarget, req.path);
                     res.set('Content-Type', 'text/plain');
