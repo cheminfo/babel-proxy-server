@@ -11,7 +11,9 @@ module.exports = function () {
             fetch(url.resolve(config.proxyTarget, req.path))
                 .then(res => res.text())
                 .then(txt => {
-                    const transformed = babel.transform(txt);
+                    const transformed = babel.transform(txt, {
+                        presets: ['es2017']
+                    });
                     res.set('Content-Type', 'text/plain');
                     res.send(transformed);
                 }).catch(() => {

@@ -12,7 +12,6 @@ app.use(babelProxy());
 app.use(proxy({
     target: config.proxyTarget,
     secure: true,
-    logLevel: 'debug',
     changeOrigin: true
 }));
 
