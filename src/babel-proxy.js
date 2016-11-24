@@ -12,11 +12,16 @@ module.exports = function () {
                 .then(res => res.text())
                 .then(txt => {
                     const transformed = babel.transform(txt, {
-                        presets: ['es2017']
+                        presets: ['es2017'],
+                        minified: false,
+                        ast: false
+                        // evaluate: true,
+                        // babili: false,
+                        // lineWrap: false
                     });
                     console.log('transformed', config.proxyTarget, req.path);
                     res.set('Content-Type', 'text/plain');
-                    res.send(transformed);
+                    res.send(transformed.code);
                 }).catch(() => {
                 console.log('failed to transform', config.proxyTarget, req.path);
                 next(); // fallback to proxy
