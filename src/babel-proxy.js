@@ -19,7 +19,7 @@ module.exports = function () {
                 .then(txt => {
                     if(txt === null) return next();
                     const transformed = babel.transform(txt, {
-                        presets: ['es2017'],
+                        presets: ['es2017', 'transform-es2015-modules-amd-if-required'],
                         minified: false,
                         ast: false
                     });
