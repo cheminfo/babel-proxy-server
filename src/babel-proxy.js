@@ -8,7 +8,7 @@ const config = require('./config');
 module.exports = function () {
     return function (req, res, next) {
         if (isJs(req)) {
-            fetch(url.resolve(config.proxyTarget, req.path))
+            fetch(url.resolve(config.proxyTarget, req.path.replace(/^\//, '')))
                 .then(response => {
                     if(response.status >= 400) {
                         invalidateCache(res);
