@@ -25,7 +25,7 @@ module.exports = function () {
                         ast: false
                     });
                     console.log('transformed', config.proxyTarget, req.path);
-                    res.set('Content-Type', 'text/plain');
+                    res.set('Content-Type', 'application/javascript');
                     res.send(transformed.code);
                 }).catch(() => {
                 invalidateCache(res);

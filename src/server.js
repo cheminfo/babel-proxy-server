@@ -21,7 +21,12 @@ app.use(babelProxy());
 app.use(proxy({
     target: config.proxyTarget,
     secure: true,
-    changeOrigin: true
+    changeOrigin: true,
+    onProxyRes: function(proxyRes, req) {
+        if(req.path.endsWith('.js')) {
+            proxyRes.headers['Content-Type'] = 'application/javascript';
+        }
+    }
 }));
 
 app.listen(config.port, function () {
