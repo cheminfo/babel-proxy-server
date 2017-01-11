@@ -7,17 +7,17 @@ const config = require('./config');
 
 module.exports = function () {
     return function (req, res, next) {
-        if (isJs(req)) {
+        if (shouldTransform(req)) {
             fetch(url.resolve(config.proxyTarget, req.path.replace(/^\//, '')))
                 .then(response => {
                     if(response.status >= 400) {
                         invalidateCache(res);
                         return null;
                     }
-                    return response.text()
+                    return response.text();
                 })
                 .then(txt => {
-                    if(txt === null) return next();
+                    if(txt === null) return next(); // fallback to proxy
                     const transformed = babel.transform(txt, {
                         presets: ['es2017'],
                         plugins: ['transform-es2015-modules-amd-if-required'],
@@ -33,7 +33,7 @@ module.exports = function () {
                 next(); // fallback to proxy
             });
         } else {
-            next();
+            next(); // proxy
         }
     }
 };
@@ -42,6 +42,6 @@ function invalidateCache(res) {
     res.set('Cache-Control', 'max-age=0, s-maxage=0');
 }
 
-function isJs(req) {
-    return req.path.endsWith('.js') && req.method === 'GET';
+function shouldTransform(req) {
+    return req.path.endsWith('.js') && req.method === 'GET' && req.path.match('visualizer-helper');
 }
