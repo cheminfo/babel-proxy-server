@@ -19,7 +19,7 @@ module.exports = function () {
                 .then(txt => {
                     if(txt === null) return next(); // fallback to proxy
                     const transformed = babel.transform(txt, {
-                        presets: ['es2017'],
+                        presets: [['env', {targets: {browsers: ['last 2 chrome versions', 'last 2 firefox versions', 'last 1 safari version', 'last 2 edge versions']}}]],
                         plugins: ['transform-es2015-modules-amd-if-required'],
                         minified: false,
                         ast: false
