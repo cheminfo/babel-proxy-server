@@ -13,7 +13,7 @@ module.exports = function () {
             if (config.isLocal) {
                 try {
                     // Is this required for security reasons??
-                    const p = req.path.replace('..', '.');
+                    const p = req.path.replace(/\.\./g, '.');
                     doBabel(req, res, fs.readFileSync(path.join(config.path, p)));
                 } catch (e) {
                     console.log('failed to transform', config.proxyTarget, req.path);
