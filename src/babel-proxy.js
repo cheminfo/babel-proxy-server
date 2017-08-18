@@ -34,7 +34,7 @@ module.exports = function () {
                         doBabel(req, res, txt);
                     }).catch(e => {
                     invalidateCache(res);
-                    console.log('failed to transform', config.proxyTarget, req.path);
+                    console.log('failed to transform', config.proxyTarget, req.path, e.message);
                     next(); // fallback to proxy
                 });
             }
