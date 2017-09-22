@@ -63,6 +63,7 @@ function invalidateCache(res) {
 }
 
 function shouldTransform(req) {
+    if (req.query.noBabel) return false;
     if (!req.path.endsWith('.js')) return false;
     console.log('ends with js', req.path);
     if (config.isLocal) return true;
