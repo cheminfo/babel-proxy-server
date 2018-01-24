@@ -18,7 +18,8 @@ app.use(cacheControl({
     browser: MONTH,
     server: MONTH
 }));
-app.use(babelProxy());
+
+if (! config.noBabel) app.use(babelProxy());
 
 const parsedProxyTarget = url.parse(config.proxyTarget);
 if(parsedProxyTarget.protocol === 'file:') {

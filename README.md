@@ -10,6 +10,10 @@ If it is on the local system don't forget to add 3 forward slashes `/`
 node src/server.js --proxyTarget=file:///Users/xyz/
 ``` 
 
+Options:
+* --noBabel : use it only as a proxy, don't transpile
+
+
 This instruction would then create a webserver using as base the folder `/Users/xyz` and babelifies all the javascript files while keeping intact the other files. By default the webserver is available on port `9898`.
 
 
