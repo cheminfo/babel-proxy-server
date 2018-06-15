@@ -4,14 +4,14 @@
     "start-dev": "nodemon src/server.js"
   },
   "dependencies": {
-    "babel-core": "^6.18.2",
+    "babel-core": "^6.26.3",
     "babel-plugin-transform-es2015-modules-amd-if-required": "^1.0.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.1.8",
+    "babel-preset-env": "^1.7.0",
     "cors": "^2.8.1",
-    "express": "^4.14.0",
-    "http-proxy-middleware": "^0.17.2",
-    "node-fetch": "^1.6.3"
+    "express": "^4.16.3",
+    "http-proxy-middleware": "^0.18.0",
+    "node-fetch": "^2.1.2"
   },
   "name": "babel-proxy-server",
   "version": "0.0.1",
@@ -20,6 +20,6 @@
   "author": "Daniel Kostro <kostro.d@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.17.5"
   }
 }
