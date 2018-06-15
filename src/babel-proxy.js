@@ -68,7 +68,10 @@ function doBabel(req, res, txt) {
         }
       ]
     ],
-    plugins: ['transform-es2015-modules-amd-if-required'],
+    plugins: [
+      'transform-es2015-modules-amd-if-required',
+      'transform-object-rest-spread'
+    ],
     minified: false,
     ast: false
   });
