@@ -1,6 +1,12 @@
 # babel-proxy-server
 A proxy server that babelifies js files
 
+# If you want to share your parent git folder
+
+```
+npm run server
+```
+
 # How to use it ?
 
 You just need to specify where the original files are either on a http server or a local file system.
