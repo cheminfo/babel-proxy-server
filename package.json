@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "node src/server.js",
-    "start-dev": "nodemon src/server.js"
+    "start-dev": "nodemon src/server.js",
+    "ngrok": "ngrok http 9898"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
@@ -20,6 +21,7 @@
   "author": "Daniel Kostro <kostro.d@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "ngrok": "^3.0.1",
     "nodemon": "^1.17.5"
   }
 }

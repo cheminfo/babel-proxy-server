@@ -16,6 +16,7 @@ module.exports = function() {
           const p = req.path.replace(/\.\./g, '.');
           doBabel(req, res, fs.readFileSync(path.join(config.path, p)));
         } catch (e) {
+          console.log(e);
           console.log('failed to transform', config.proxyTarget, req.path);
           return next(); // fallback to static asset
         }
