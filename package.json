@@ -1,6 +1,7 @@
 {
   "scripts": {
     "server": "node src/server.js",
+    "start": "npm run server",
     "server-dev": "nodemon src/server.js",
     "ngrok": "ngrok http 9898"
   },
