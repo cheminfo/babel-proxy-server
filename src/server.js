@@ -23,7 +23,8 @@ app.use(
 
 if (!config.noBabel) app.use(babelProxy());
 
-console.log(__dirname.replace())
+if (config.noBabel) console.log('Not using babel proxy');
+console.log(__dirname.replace());
 const parsedProxyTarget = url.parse(config.proxyTarget);
 if (parsedProxyTarget.protocol === 'file:') {
   app.use(express.static(parsedProxyTarget.pathname));
@@ -44,5 +45,5 @@ if (parsedProxyTarget.protocol === 'file:') {
 
 app.listen(config.port, function() {
   console.log(`listening on port ${config.port}`);
-  console.log('Local proxy URL: http://localhost:'+config.port+'/');
+  console.log('Local proxy URL: http://localhost:' + config.port + '/');
 });
