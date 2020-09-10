@@ -14,7 +14,7 @@
     "cors": "^2.8.1",
     "express": "^4.16.3",
     "http-proxy-middleware": "^0.18.0",
-    "node-fetch": "^2.1.2"
+    "node-fetch": "^2.6.1"
   },
   "name": "babel-proxy-server",
   "version": "0.0.1",
