@@ -5,7 +5,7 @@ const app = express();
 const cors = require("cors");
 const cacheControl = require("./cacheControl");
 const babelProxy = require("./babel-proxy");
-const proxy = require("http-proxy-middleware");
+const {createProxyMiddleware} = require("http-proxy-middleware");
 const config = require("./config");
 const url = require("url");
 const addProxies = require("./addProxies");
@@ -30,7 +30,7 @@ if (parsedProxyTarget.protocol === "file:") {
   app.use(express.static(parsedProxyTarget.pathname));
 } else {
   app.use(
-    proxy({
+    createProxyMiddleware({
       target: config.proxyTarget,
       secure: true,
       changeOrigin: true,

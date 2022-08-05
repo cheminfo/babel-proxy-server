@@ -25,5 +25,8 @@
   "devDependencies": {
     "ngrok": "^4.0.1",
     "nodemon": "^2.0.9"
+  },
+  "volta": {
+    "node": "16.16.0"
   }
 }
