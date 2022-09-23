@@ -1,4 +1,10 @@
 {
+  "private": true,
+  "name": "babel-proxy-server",
+  "version": "1.0.0",
+  "description": "Proxy that converts js files with babel",
+  "main": "src/server.js",
+  "author": "Daniel Kostro <kostro.d@gmail.com>",
   "scripts": {
     "server": "node src/server.js",
     "start": "npm run server",
@@ -16,11 +22,6 @@
     "http-proxy-middleware": "^2.0.6",
     "node-fetch": "^2.6.1"
   },
-  "name": "babel-proxy-server",
-  "version": "1.0.0",
-  "description": "Proxy that converts js files with babel",
-  "main": "src/server.js",
-  "author": "Daniel Kostro <kostro.d@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "ngrok": "^4.3.3",
