@@ -17,7 +17,7 @@
     "node-fetch": "^2.6.1"
   },
   "name": "babel-proxy-server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Proxy that converts js files with babel",
   "main": "src/server.js",
   "author": "Daniel Kostro <kostro.d@gmail.com>",
