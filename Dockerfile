@@ -1,7 +1,7 @@
-FROM node:16
+FROM node:16.17.0
 
 WORKDIR /app
 COPY ./ ./
-RUN npm ci --production
+RUN npm ci --omit=dev
 
-CMD ["node", "src/server.js"]
+ENTRYPOINT ["node", "src/server.js"]

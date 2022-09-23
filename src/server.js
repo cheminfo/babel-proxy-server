@@ -43,7 +43,14 @@ if (parsedProxyTarget.protocol === "file:") {
   );
 }
 
-app.listen(config.port, function () {
+const server = app.listen(config.port, function () {
   console.log(`listening on port ${config.port}`);
   console.log("Local proxy URL: http://localhost:" + config.port + "/");
 });
+
+function exitHandler() {
+  server.close();
+}
+
+process.on('SIGINT', exitHandler);
+process.on('SIGTERM', exitHandler);
