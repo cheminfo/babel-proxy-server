@@ -13,13 +13,12 @@
     "ngrok": "ngrok http 9898"
   },
   "dependencies": {
-    "babel-core": "^6.26.3",
-    "babel-plugin-transform-es2015-modules-amd-if-required": "^1.0.4",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
     "cors": "^2.8.5",
     "express": "^5.2.1",
-    "http-proxy-middleware": "^3.0.5"
+    "http-proxy-middleware": "^3.0.5",
+    "minimist": "^1.2.8"
   },
   "license": "MIT",
   "devDependencies": {

@@ -1,6 +1,6 @@
 'use strict';
 
-const babel = require('babel-core');
+const babel = require('@babel/core');
 const url = require('url');
 const config = require('./config');
 const fs = require('fs');
@@ -55,22 +55,18 @@ function doBabel(req, res, txt) {
   const transformed = babel.transform(txt, {
     presets: [
       [
-        'env',
+        '@babel/preset-env',
         {
+          modules: 'amd',
           targets: {
             browsers: [
               'last 2 chrome versions',
               'last 2 firefox versions',
               'last 1 safari version',
-              'last 2 edge versions',
             ],
           },
         },
       ],
-    ],
-    plugins: [
-      'transform-es2015-modules-amd-if-required',
-      'transform-object-rest-spread',
     ],
     minified: false,
     ast: false,
