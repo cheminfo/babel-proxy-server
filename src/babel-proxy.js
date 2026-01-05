@@ -1,14 +1,13 @@
 'use strict';
 
-const babel = require('babel-core');
-const fetch = require('node-fetch');
-const url = require('url');
+const babel = require('@babel/core');
+const url = require('node:url');
 const config = require('./config');
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
-module.exports = function() {
-  return function(req, res, next) {
+module.exports = function () {
+  return function (req, res, next) {
     if (shouldTransform(req)) {
       if (config.isLocal) {
         try {
@@ -23,24 +22,24 @@ module.exports = function() {
         // no static asset fallback
       } else {
         fetch(url.resolve(config.proxyTarget, req.path.replace(/^\//, '')))
-          .then(response => {
+          .then((response) => {
             if (response.status >= 400) {
               invalidateCache(res);
               return null;
             }
             return response.text();
           })
-          .then(txt => {
+          .then((txt) => {
             if (txt === null) return next(); // fallback to proxy
             doBabel(req, res, txt);
           })
-          .catch(e => {
+          .catch((e) => {
             invalidateCache(res);
             console.log(
               'failed to transform',
               config.proxyTarget,
               req.path,
-              e.message
+              e.message,
             );
             next(); // fallback to proxy
           });
@@ -56,25 +55,21 @@ function doBabel(req, res, txt) {
   const transformed = babel.transform(txt, {
     presets: [
       [
-        'env',
+        '@babel/preset-env',
         {
+          modules: 'amd',
           targets: {
             browsers: [
               'last 2 chrome versions',
               'last 2 firefox versions',
               'last 1 safari version',
-              'last 2 edge versions'
-            ]
-          }
-        }
-      ]
-    ],
-    plugins: [
-      'transform-es2015-modules-amd-if-required',
-      'transform-object-rest-spread'
+            ],
+          },
+        },
+      ],
     ],
     minified: false,
-    ast: false
+    ast: false,
   });
   res.set('Content-Type', 'application/javascript');
   res.send(transformed.code);
