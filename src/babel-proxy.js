@@ -1,10 +1,10 @@
 'use strict';
 
 const babel = require('@babel/core');
-const url = require('url');
+const url = require('node:url');
 const config = require('./config');
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 module.exports = function () {
   return function (req, res, next) {
