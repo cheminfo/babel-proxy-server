@@ -5,7 +5,6 @@ const url = require('node:url');
 const config = require('./config');
 const fs = require('node:fs');
 const path = require('node:path');
-const { transformSync } = require('esbuild')
 
 module.exports = function () {
   return function (req, res, next) {
@@ -52,39 +51,13 @@ module.exports = function () {
   };
 };
 
-function doBabel(req, res, txt) {
-  const esmJs = transformSync(txt, {format: 'esm'});
-  const transformed = babel.transform(esmJs.code, {
-    presets: [
-      [
-        '@babel/preset-env',
-        {
-          modules: 'amd',
-          targets: {
-            browsers: [
-              'last 2 chrome versions',
-              'last 2 firefox versions',
-              'last 1 safari version',
-            ],
-          },
-        },
-      ],
-    ],
-    minified: false,
-    ast: false,
-  });
-  res.set('Content-Type', 'application/javascript');
-  res.send(transformed.code);
-  console.log('transformed', config.proxyTarget, req.path);
-}
 
-function doBabelOld(req, res, txt) {
+function doBabel(req, res, txt) {
     const transformed = babel.transform(txt, {
         presets: [
             [
                 '@babel/preset-env',
                 {
-
                     targets: {
                         browsers: [
                             'last 2 chrome versions',
