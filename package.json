@@ -15,7 +15,9 @@
   "dependencies": {
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
+    "babel-plugin-transform-es2015-modules-amd-if-required": "^1.0.4",
     "cors": "^2.8.5",
+    "esbuild": "^0.27.2",
     "express": "^5.2.1",
     "http-proxy-middleware": "^3.0.5",
     "minimist": "^1.2.8"

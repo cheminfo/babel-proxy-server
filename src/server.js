@@ -23,7 +23,6 @@ addProxies(app);
 if (!config.noBabel) app.use(babelProxy());
 
 if (config.noBabel) console.log('Not using babel proxy');
-console.log(__dirname.replace());
 const parsedProxyTarget = new URL(config.proxyTarget);
 if (parsedProxyTarget.protocol === 'file:') {
   app.use(express.static(parsedProxyTarget.pathname));

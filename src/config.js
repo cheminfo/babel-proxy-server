@@ -13,7 +13,8 @@ config.port = config.port || 9898;
 const parsed = new URL(config.proxyTarget);
 if (parsed.protocol === 'file:') {
   config.isLocal = true;
-  config.path = parsed.path;
+  config.path = parsed.pathname;
 }
 
 module.exports = config;
+
