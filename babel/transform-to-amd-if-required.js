@@ -1,8 +1,10 @@
-import template from "babel-template";
+import template from "@babel/template";
+import modulesPlugin from '@babel/plugin-transform-modules-commonjs';
 
-let buildDefine = template(`
-  define(MODULE_NAME, [SOURCES], function (PARAMS) {
-    BODY;
+
+let buildDefine = template.default(`
+  define(%%MODULE_NAME%%, %%SOURCES%%, function (%%PARAMS%%) {
+    %%BODY%%;
   });
 `);
 
@@ -16,9 +18,17 @@ export default function ({ types: t }) {
         if (args.length !== 1) return false;
 
         let arg = args[0];
-        if (!arg.isStringLiteral()) return false;
+        return arg.isStringLiteral();
+    }
 
-        return true;
+    function isValidDefaultRequire(path) {
+        if(!path.isCallExpression()) return false;
+        if(!path.get('callee').isIdentifier({name: '_interopRequireDefault'})) return false;
+
+        let args = path.get('arguments');
+        if(args.length !== 1) return false;
+
+        return isValidRequireCall(args[0]);
     }
 
     function isValidDefine(path) {
@@ -79,23 +89,31 @@ export default function ({ types: t }) {
             if (!id.isIdentifier()) return;
 
             let init = path.get("init");
-            if (!isValidRequireCall(init)) return;
 
-            let source = init.node.arguments[0];
-            this.sourceNames[source.value] = true;
-            this.sources.push([id.node, source]);
+            if (isValidRequireCall(init)) {
+                let dependency = init.node.arguments[0];
+                this.sourceNames[dependency.value] = true;
+                this.sources.push({moduleParam: id.node, dependency, identifier: null});
+                path.remove();
+            }
 
-            path.remove();
+            if(isValidDefaultRequire(init)) {
+                let dependency = init.node.arguments[0].arguments[0];
+                this.sources.push({moduleParam: {type: 'Identifier', name: `${id.node.name}Module`}, dependency, identifier: id.node});
+                path.remove();
+            }
+
         }
     };
 
     return {
-        inherits: require("babel-plugin-transform-es2015-modules-commonjs"),
+        inherits: modulesPlugin.default,
 
         pre() {
             // source strings
             this.sources = [];
             this.sourceNames = Object.create(null);
+
 
             // bare sources
             this.bareSources = [];
@@ -111,17 +129,19 @@ export default function ({ types: t }) {
                     this.ran = true;
 
                     let body = path.get("body")
-                    let last = body[body.length - 1];
                     for (var i = 0; i < body.length; i++) {
                         if (isValidDefine(body[i]) || isValidRequireConfig(body[i])) return;
                     }
 
                     path.traverse(amdVisitor, this);
 
-                    let params = this.sources.map(source => source[0]);
-                    let sources = this.sources.map(source => source[1]);
+                    let params = this.sources.map(source => source.moduleParam);
+                    let dependencies = this.sources.map(source => source.dependency);
+                    let interopCalls = this.sources.filter(source => source.identifier !== null).map(({moduleParam, identifier}) => {
+                        return template.default.ast`let ${identifier.name} = _interopRequireDefault(${moduleParam.name});`
+                    });
 
-                    sources = sources.concat(this.bareSources.filter((str) => {
+                    dependencies = dependencies.concat(this.bareSources.filter((str) => {
                         return !this.sourceNames[str.value];
                     }));
 
@@ -129,18 +149,20 @@ export default function ({ types: t }) {
                     if (moduleName) moduleName = t.stringLiteral(moduleName);
 
                     if (this.hasExports) {
-                        sources.unshift(t.stringLiteral("exports"));
+                        dependencies.unshift(t.stringLiteral("exports"));
                         params.unshift(t.identifier("exports"));
                     }
 
                     if (this.hasModule) {
-                        sources.unshift(t.stringLiteral("module"));
+                        dependencies.unshift(t.stringLiteral("module"));
                         params.unshift(t.identifier("module"));
                     }
 
+                    path.node.body.unshift(...interopCalls);
+
                     path.node.body = [buildDefine({
                         MODULE_NAME: moduleName,
-                        SOURCES: sources,
+                        SOURCES: t.arrayExpression(dependencies),
                         PARAMS: params,
                         BODY: path.node.body
                     })];
