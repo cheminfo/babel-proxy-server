@@ -1,8 +1,8 @@
-import template from "@babel/template";
+import {smart as template} from "@babel/template";
 import modulesPlugin from '@babel/plugin-transform-modules-commonjs';
 
 
-let buildDefine = template.default(`
+let buildDefine = template(`
   define(%%MODULE_NAME%%, %%SOURCES%%, function (%%PARAMS%%) {
     %%BODY%%;
   });
@@ -107,7 +107,7 @@ export default function ({ types: t }) {
     };
 
     return {
-        inherits: modulesPlugin.default,
+        inherits: modulesPlugin,
 
         pre() {
             // source strings
@@ -138,7 +138,7 @@ export default function ({ types: t }) {
                     let params = this.sources.map(source => source.moduleParam);
                     let dependencies = this.sources.map(source => source.dependency);
                     let interopCalls = this.sources.filter(source => source.identifier !== null).map(({moduleParam, identifier}) => {
-                        return template.default.ast`let ${identifier.name} = _interopRequireDefault(${moduleParam.name});`
+                        return template.ast`let ${identifier.name} = _interopRequireDefault(${moduleParam.name});`
                     });
 
                     dependencies = dependencies.concat(this.bareSources.filter((str) => {

@@ -1,12 +1,11 @@
-'use strict';
+import url from 'node:url';
+import fs from 'node:fs';
+import path from 'node:path';
+import babel from '@babel/core';
+import config from './config.js';
 
-const babel = require('@babel/core');
-const url = require('node:url');
-const config = require('./config');
-const fs = require('node:fs');
-const path = require('node:path');
 
-module.exports = function () {
+export default function () {
   return function (req, res, next) {
     if (shouldTransform(req)) {
       if (config.isLocal) {

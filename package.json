@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Proxy that converts js files with babel",
   "main": "src/server.js",
+  "type": "module",
   "author": "Daniel Kostro <kostro.d@gmail.com>",
   "scripts": {
     "server": "node src/server.js",
