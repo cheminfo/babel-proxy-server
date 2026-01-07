@@ -68,7 +68,7 @@ function doBabel(req, res, txt) {
                 },
             ],
         ],
-        plugins: ['babel-plugin-transform-es2015-modules-amd-if-required'],
+        plugins: ['./babel/transform-to-amd-if-required.js'],
         minified: false,
         ast: false,
     });
