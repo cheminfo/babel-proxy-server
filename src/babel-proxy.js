@@ -51,29 +51,30 @@ module.exports = function () {
   };
 };
 
+
 function doBabel(req, res, txt) {
-  const transformed = babel.transform(txt, {
-    presets: [
-      [
-        '@babel/preset-env',
-        {
-          modules: 'amd',
-          targets: {
-            browsers: [
-              'last 2 chrome versions',
-              'last 2 firefox versions',
-              'last 1 safari version',
+    const transformed = babel.transform(txt, {
+        presets: [
+            [
+                '@babel/preset-env',
+                {
+                    targets: {
+                        browsers: [
+                            'last 2 chrome versions',
+                            'last 2 firefox versions',
+                            'last 1 safari version',
+                        ],
+                    },
+                },
             ],
-          },
-        },
-      ],
-    ],
-    minified: false,
-    ast: false,
-  });
-  res.set('Content-Type', 'application/javascript');
-  res.send(transformed.code);
-  console.log('transformed', config.proxyTarget, req.path);
+        ],
+        plugins: ['babel-plugin-transform-es2015-modules-amd-if-required'],
+        minified: false,
+        ast: false,
+    });
+    res.set('Content-Type', 'application/javascript');
+    res.send(transformed.code);
+    console.log('transformed', config.proxyTarget, req.path);
 }
 
 function invalidateCache(res) {
