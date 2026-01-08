@@ -14,7 +14,6 @@ if (!config.proxyTarget) {
         config.proxyTarget=import.meta.url.replace(/(\/git\/).*/,'$1');
 
     }
-  console.log('Using as home directory: '+config.proxyTarget);
 }
 
 if(process.env.PROXY_CONFIG_FILE) {
@@ -27,6 +26,8 @@ if(process.env.PROXY_CONFIG_FILE) {
 }
 
 if (!config.proxyTarget) throw new Error('Invalid configuration, missing proxyTarget');
+
+console.log('Proxy target: ', config.proxyTarget);
 config.port = config.port || 9898;
 
 const parsed = new URL(config.proxyTarget);

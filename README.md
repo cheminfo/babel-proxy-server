@@ -9,7 +9,7 @@ visualizer views with the proper module format.
 First `cp .env.example .env` and edit it (following instructions in the file).
 
 ```
-npm run server
+npm start
 ```
 
 # How to test your changes in the visualizer?

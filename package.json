@@ -7,10 +7,8 @@
   "type": "module",
   "author": "Daniel Kostro <kostro.d@gmail.com>",
   "scripts": {
-    "server": "node --env-file=.env src/server.js",
-    "start": "npm run server",
-    "proxy": "node src/server.js --noBabel",
-    "server:watch": "node --env-file=.env --watch src/server.js"
+    "start": "node --env-file=.env src/server.js",
+    "start:watch": "node --env-file=.env --watch src/server.js"
   },
   "dependencies": {
     "@babel/core": "^7.28.5",
