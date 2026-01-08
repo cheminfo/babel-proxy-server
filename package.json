@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Proxy that converts js files with babel",
   "main": "src/server.js",
+  "type": "module",
   "author": "Daniel Kostro <kostro.d@gmail.com>",
   "scripts": {
     "server": "node src/server.js",
@@ -14,8 +15,10 @@
   },
   "dependencies": {
     "@babel/core": "^7.28.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
     "@babel/preset-env": "^7.28.5",
-    "babel-plugin-transform-es2015-modules-amd-if-required": "^1.0.4",
+    "@babel/template": "^7.27.2",
+    "@babel/traverse": "^7.28.5",
     "cors": "^2.8.5",
     "express": "^5.2.1",
     "http-proxy-middleware": "^3.0.5",

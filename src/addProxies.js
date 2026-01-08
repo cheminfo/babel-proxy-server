@@ -1,11 +1,11 @@
-const { readFileSync, existsSync } = require("fs");
-const { join } = require("path");
-const { createProxyMiddleware } = require("http-proxy-middleware");
+import {existsSync, readFileSync} from "node:fs";
+import {join} from "node:path";
+import {createProxyMiddleware} from "http-proxy-middleware";
 
-function addProxies(app) {
+export default function addProxies(app) {
   let proxies = [];
 
-  let proxyConfigFile = join(__dirname, "proxy.json");
+  let proxyConfigFile = join(import.meta.dirname, "proxy.json");
   if (existsSync(proxyConfigFile)) {
     proxies = JSON.parse(readFileSync(proxyConfigFile, "utf8"));
     for (let proxy of proxies) {
@@ -19,5 +19,3 @@ function addProxies(app) {
     }
   }
 }
-
-module.exports = addProxies;

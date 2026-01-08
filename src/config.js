@@ -1,9 +1,9 @@
-'use strict';
+import minimist from 'minimist';
 
-const config = require('minimist')(process.argv.slice(2));
+const config = minimist(process.argv.slice(2));
 
-if (! config.proxyTarget && __dirname.match('/git')) {
-  config.proxyTarget='file://'+__dirname.replace(/(\/git\/).*/,'$1');
+if (! config.proxyTarget && import.meta.dirname.match('/git')) {
+  config.proxyTarget='file://'+import.meta.dirname.replace(/(\/git\/).*/,'$1');
   console.log('Using as home directory: '+config.proxyTarget);
 }
 
@@ -16,5 +16,5 @@ if (parsed.protocol === 'file:') {
   config.path = parsed.pathname;
 }
 
-module.exports = config;
+export default config;
 

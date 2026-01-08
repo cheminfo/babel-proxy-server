@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = function(options) {
+export default function(options) {
   return function(req, res, next) {
     const cache = [];
     if (options.browser !== undefined) {
