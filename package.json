@@ -10,8 +10,7 @@
     "server": "node --env-file=.env src/server.js",
     "start": "npm run server",
     "proxy": "node src/server.js --noBabel",
-    "server:watch": "node --env-file=.env --watch src/server.js",
-    "ngrok": "ngrok http 9898"
+    "server:watch": "node --env-file=.env --watch src/server.js"
   },
   "dependencies": {
     "@babel/core": "^7.28.5",
@@ -24,9 +23,6 @@
     "minimist": "^1.2.8"
   },
   "license": "MIT",
-  "devDependencies": {
-    "ngrok": "^4.3.3"
-  },
   "volta": {
     "node": "24.12.0"
   }
