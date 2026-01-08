@@ -1,3 +1,6 @@
+// Reworked from https://github.com/kayneb/babel-plugin-transform-es2015-modules-amd-if-required
+// Licence: https://github.com/kayneb/babel-plugin-transform-es2015-modules-amd-if-required/blob/1ae1939c3db8bb437ba5881c8479f3171694fadb/LICENSE
+
 import {smart as template} from "@babel/template";
 import modulesPlugin from '@babel/plugin-transform-modules-commonjs';
 
