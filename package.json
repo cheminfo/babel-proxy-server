@@ -7,10 +7,10 @@
   "type": "module",
   "author": "Daniel Kostro <kostro.d@gmail.com>",
   "scripts": {
-    "server": "node src/server.js",
+    "server": "node --env-file=.env src/server.js",
     "start": "npm run server",
     "proxy": "node src/server.js --noBabel",
-    "server-dev": "node --watch src/server.js",
+    "server:watch": "node --env-file=.env --watch src/server.js",
     "ngrok": "ngrok http 9898"
   },
   "dependencies": {
