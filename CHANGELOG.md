@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/cheminfo/babel-proxy-server/compare/v2.0.1...v2.1.0) (2026-01-09)
+
+
+### Features
+
+* add support of arrow functions in amd define statements ([#21](https://github.com/cheminfo/babel-proxy-server/issues/21)) ([a0257ab](https://github.com/cheminfo/babel-proxy-server/commit/a0257ab0a9797e0794805077b60fb239dd10e10b))
+
 ## [2.0.1](https://github.com/cheminfo/babel-proxy-server/compare/v2.0.0...v2.0.1) (2026-01-09)
 
 
