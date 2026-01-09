@@ -67,7 +67,7 @@ function doBabel(req, res, txt) {
                 },
             ],
         ],
-        plugins: ['@zakodium/babel-plugin-transform-modules-amd'],
+        plugins: ['@babel/plugin-transform-destructuring', '@zakodium/babel-plugin-transform-modules-amd'],
         minified: false,
         ast: false,
     });
