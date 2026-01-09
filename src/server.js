@@ -33,10 +33,16 @@ if (parsedProxyTarget.protocol === 'file:') {
       target: config.proxyTarget,
       secure: true,
       changeOrigin: true,
-      onProxyRes(proxyRes, req) {
-        if (req.path.endsWith('.js')) {
-          proxyRes.headers['Content-Type'] = 'application/javascript';
-        }
+      on: {
+        proxyRes: (proxyRes, req) => {
+          if (
+            req.path.endsWith('.js') ||
+            req.path.endsWith('.mjs') ||
+            req.path.endsWith('.cjs')
+          ) {
+            proxyRes.headers['Content-Type'] = 'application/javascript';
+          }
+        },
       },
     }),
   );
