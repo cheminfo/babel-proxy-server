@@ -1,11 +1,14 @@
-import url from 'node:url';
+/* eslint-disable no-console */
 import fs from 'node:fs';
 import path from 'node:path';
+import url from 'node:url';
+
 import babel from '@babel/core';
+
 import config from './config.js';
 
-export default function () {
-  return function (req, res, next) {
+export function createBabelProxy() {
+  return function babelProxyMiddleware(req, res, next) {
     if (shouldTransform(req)) {
       if (config.isLocal) {
         try {

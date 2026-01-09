@@ -7,6 +7,8 @@
   "type": "module",
   "author": "Daniel Kostro <kostro.d@gmail.com>",
   "scripts": {
+    "eslint": "eslint --cache ./",
+    "eslint-fix": "eslint ./ --fix",
     "prettier": "prettier --check ./",
     "prettier-write": "prettier --write ./",
     "start": "node --env-file=.env src/server.js",
@@ -27,6 +29,8 @@
     "node": "24.12.0"
   },
   "devDependencies": {
+    "eslint": "^9.39.2",
+    "eslint-config-cheminfo": "^17.0.0",
     "prettier": "^3.7.4"
   }
 }

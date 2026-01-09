@@ -1,7 +1,9 @@
-import minimist from 'minimist';
-import url from 'node:url';
 import fs from 'node:fs';
 import path from 'node:path';
+import process from 'node:process';
+import url from 'node:url';
+
+import minimist from 'minimist';
 
 const config = minimist(process.argv.slice(2));
 
@@ -11,6 +13,7 @@ if (!config.proxyTarget) {
     const dir = path.resolve(baseDir, process.env.GITHUB_DIR);
     config.proxyTarget = url.pathToFileURL(dir).toString();
   } else if (import.meta.dirname.match('/git')) {
+    // eslint-disable-next-line prefer-named-capture-group
     config.proxyTarget = import.meta.url.replace(/(\/git\/).*/, '$1');
   }
 }
@@ -30,11 +33,18 @@ if (process.env.PROXY_CONFIG_FILE) {
   config.additionalProxies = JSON.parse(fs.readFileSync(target, 'utf-8'));
 }
 
-if (!config.proxyTarget)
+if (!config.proxyTarget) {
   throw new Error('Invalid configuration, missing proxyTarget');
+}
 
+// eslint-disable-next-line no-console
 console.log('Proxy target: ', config.proxyTarget);
 config.port = config.port || 9898;
+
+if (config.noBabel) {
+  // eslint-disable-next-line no-console
+  console.log('Not using babel proxy');
+}
 
 const parsed = new URL(config.proxyTarget);
 if (parsed.protocol === 'file:') {
