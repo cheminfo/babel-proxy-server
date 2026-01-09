@@ -7,27 +7,20 @@
   "type": "module",
   "author": "Daniel Kostro <kostro.d@gmail.com>",
   "scripts": {
-    "server": "node src/server.js",
-    "start": "npm run server",
-    "proxy": "node src/server.js --noBabel",
-    "server-dev": "node --watch src/server.js",
-    "ngrok": "ngrok http 9898"
+    "start": "node --env-file=.env src/server.js",
+    "start:watch": "node --env-file=.env --watch src/server.js"
   },
   "dependencies": {
     "@babel/core": "^7.28.5",
-    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
+    "@babel/plugin-transform-destructuring": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
-    "@babel/template": "^7.27.2",
-    "@babel/traverse": "^7.28.5",
+    "@zakodium/babel-plugin-transform-modules-amd": "^1.0.1",
     "cors": "^2.8.5",
     "express": "^5.2.1",
     "http-proxy-middleware": "^3.0.5",
     "minimist": "^1.2.8"
   },
   "license": "MIT",
-  "devDependencies": {
-    "ngrok": "^4.3.3"
-  },
   "volta": {
     "node": "24.12.0"
   }
