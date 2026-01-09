@@ -1,12 +1,14 @@
-import url from 'node:url';
+/* eslint-disable no-console */
 import fs from 'node:fs';
 import path from 'node:path';
+import url from 'node:url';
+
 import babel from '@babel/core';
+
 import config from './config.js';
 
-
-export default function () {
-  return function (req, res, next) {
+export function createBabelProxy() {
+  return function babelProxyMiddleware(req, res, next) {
     if (shouldTransform(req)) {
       if (config.isLocal) {
         try {
@@ -48,32 +50,34 @@ export default function () {
       next();
     }
   };
-};
-
+}
 
 function doBabel(req, res, txt) {
-    const transformed = babel.transform(txt, {
-        presets: [
-            [
-                '@babel/preset-env',
-                {
-                    targets: {
-                        browsers: [
-                            'last 2 chrome versions',
-                            'last 2 firefox versions',
-                            'last 1 safari version',
-                        ],
-                    },
-                },
+  const transformed = babel.transform(txt, {
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          targets: {
+            browsers: [
+              'last 2 chrome versions',
+              'last 2 firefox versions',
+              'last 1 safari version',
             ],
-        ],
-        plugins: ['@babel/plugin-transform-destructuring', '@zakodium/babel-plugin-transform-modules-amd'],
-        minified: false,
-        ast: false,
-    });
-    res.set('Content-Type', 'application/javascript');
-    res.send(transformed.code);
-    console.log('transformed', config.proxyTarget, req.path);
+          },
+        },
+      ],
+    ],
+    plugins: [
+      '@babel/plugin-transform-destructuring',
+      '@zakodium/babel-plugin-transform-modules-amd',
+    ],
+    minified: false,
+    ast: false,
+  });
+  res.set('Content-Type', 'application/javascript');
+  res.send(transformed.code);
+  console.log('transformed', config.proxyTarget, req.path);
 }
 
 function invalidateCache(res) {

@@ -1,11 +1,13 @@
-import express from 'express';
-import cors from 'cors';
-import {createProxyMiddleware} from 'http-proxy-middleware';
+import process from 'node:process';
 
-import cacheControl from './cacheControl.js';
-import babelProxy from './babel-proxy.js';
-import config from './config.js';
+import cors from 'cors';
+import express from 'express';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+
 import addProxies from './addProxies.js';
+import { createBabelProxy } from './babel-proxy.js';
+import { createCacheControlMiddleware } from './cacheControl.js';
+import config from './config.js';
 
 const HOUR = 3600;
 const DAY = 24 * HOUR;
@@ -14,15 +16,14 @@ const MONTH = 30 * DAY;
 const app = express();
 app.use(cors());
 app.use(
-  cacheControl({
+  createCacheControlMiddleware({
     browser: MONTH,
     server: MONTH,
   }),
 );
 addProxies(app);
-if (!config.noBabel) app.use(babelProxy());
+if (!config.noBabel) app.use(createBabelProxy());
 
-if (config.noBabel) console.log('Not using babel proxy');
 const parsedProxyTarget = new URL(config.proxyTarget);
 if (parsedProxyTarget.protocol === 'file:') {
   app.use(express.static(parsedProxyTarget.pathname));
@@ -32,17 +33,25 @@ if (parsedProxyTarget.protocol === 'file:') {
       target: config.proxyTarget,
       secure: true,
       changeOrigin: true,
-      onProxyRes: function (proxyRes, req) {
-        if (req.path.endsWith('.js')) {
-          proxyRes.headers['Content-Type'] = 'application/javascript';
-        }
+      on: {
+        proxyRes: (proxyRes, req) => {
+          if (
+            req.path.endsWith('.js') ||
+            req.path.endsWith('.mjs') ||
+            req.path.endsWith('.cjs')
+          ) {
+            proxyRes.headers['Content-Type'] = 'application/javascript';
+          }
+        },
       },
     }),
   );
 }
 
-const server = app.listen(config.port, function () {
-  console.log('Local proxy URL: http://localhost:' + config.port + '/');
+const server = app.listen(config.port, function listenCallback() {
+  // eslint-disable-next-line no-console
+  console.log(`Local proxy URL: http://localhost:${config.port}/`);
+  // eslint-disable-next-line no-console
   console.log(`listening on port ${config.port}`);
 });
 
