@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/cheminfo/babel-proxy-server/compare/v1.0.0...v2.0.0) (2026-01-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* significant dependency updates, including Node.js runtime. Babel transpiler produces a different output.
+
+### Bug Fixes
+
+* allow destructuring when using require ([#18](https://github.com/cheminfo/babel-proxy-server/issues/18)) ([c839c94](https://github.com/cheminfo/babel-proxy-server/commit/c839c94ab40a4d31c6576a700c225da08f16a4f3))
+
+
+### Miscellaneous Chores
+
+* upgrade deps ([#14](https://github.com/cheminfo/babel-proxy-server/issues/14)) ([827a7a3](https://github.com/cheminfo/babel-proxy-server/commit/827a7a32511724d99530da57d6b817d4d67c4917))
+
 ## 1.0.0 (2022-09-23)
 
 
