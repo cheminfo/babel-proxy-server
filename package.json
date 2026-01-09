@@ -18,7 +18,7 @@
     "@babel/core": "^7.28.5",
     "@babel/plugin-transform-destructuring": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
-    "@zakodium/babel-plugin-transform-modules-amd": "^1.0.2",
+    "@zakodium/babel-plugin-transform-modules-amd": "^1.1.0",
     "cors": "^2.8.5",
     "express": "^5.2.1",
     "http-proxy-middleware": "^3.0.5",
