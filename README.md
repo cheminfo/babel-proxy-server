@@ -1,4 +1,5 @@
 # babel-proxy-server
+
 A proxy server which converts js files in commonjs or esm modules to amd modules.
 
 The purpose of this service is to load code from https://github.com/cheminfo-js/visualizer-helper into
@@ -33,14 +34,13 @@ node src/server.js --proxyTarget=file:///Users/xyz/git/
 
 # Serve remote http endpoint
 node src/server.js --proxyTarget=https://raw.githubusercontent.com
-``` 
+```
 
 `--noBabel`
 
 Use it only as a proxy, don't transpile
 
 default: `false`
-
 
 # Additional proxies
 

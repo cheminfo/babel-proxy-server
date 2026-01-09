@@ -4,7 +4,6 @@ import path from 'node:path';
 import babel from '@babel/core';
 import config from './config.js';
 
-
 export default function () {
   return function (req, res, next) {
     if (shouldTransform(req)) {
@@ -48,32 +47,34 @@ export default function () {
       next();
     }
   };
-};
-
+}
 
 function doBabel(req, res, txt) {
-    const transformed = babel.transform(txt, {
-        presets: [
-            [
-                '@babel/preset-env',
-                {
-                    targets: {
-                        browsers: [
-                            'last 2 chrome versions',
-                            'last 2 firefox versions',
-                            'last 1 safari version',
-                        ],
-                    },
-                },
+  const transformed = babel.transform(txt, {
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          targets: {
+            browsers: [
+              'last 2 chrome versions',
+              'last 2 firefox versions',
+              'last 1 safari version',
             ],
-        ],
-        plugins: ['@babel/plugin-transform-destructuring', '@zakodium/babel-plugin-transform-modules-amd'],
-        minified: false,
-        ast: false,
-    });
-    res.set('Content-Type', 'application/javascript');
-    res.send(transformed.code);
-    console.log('transformed', config.proxyTarget, req.path);
+          },
+        },
+      ],
+    ],
+    plugins: [
+      '@babel/plugin-transform-destructuring',
+      '@zakodium/babel-plugin-transform-modules-amd',
+    ],
+    minified: false,
+    ast: false,
+  });
+  res.set('Content-Type', 'application/javascript');
+  res.send(transformed.code);
+  console.log('transformed', config.proxyTarget, req.path);
 }
 
 function invalidateCache(res) {

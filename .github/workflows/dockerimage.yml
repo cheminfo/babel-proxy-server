@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: "GitHub ref to checkout"
+        description: 'GitHub ref to checkout'
         required: true
         default: main
       tag:
         description: 'Docker tag to push (do NOT use "latest" or version numbers)'
         required: true
-        default: "HEAD"
+        default: 'HEAD'
   push:
     tags:
       - v*

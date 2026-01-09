@@ -7,6 +7,8 @@
   "type": "module",
   "author": "Daniel Kostro <kostro.d@gmail.com>",
   "scripts": {
+    "prettier": "prettier --check ./",
+    "prettier-write": "prettier --write ./",
     "start": "node --env-file=.env src/server.js",
     "start:watch": "node --env-file=.env --watch src/server.js"
   },
@@ -23,5 +25,8 @@
   "license": "MIT",
   "volta": {
     "node": "24.12.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.7.4"
   }
 }

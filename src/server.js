@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import {createProxyMiddleware} from 'http-proxy-middleware';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 import cacheControl from './cacheControl.js';
 import babelProxy from './babel-proxy.js';

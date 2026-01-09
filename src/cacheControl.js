@@ -1,5 +1,5 @@
-export default function(options) {
-  return function(req, res, next) {
+export default function (options) {
+  return function (req, res, next) {
     const cache = [];
     if (options.browser !== undefined) {
       cache.push('max-age=' + options.browser);
@@ -14,4 +14,4 @@ export default function(options) {
 
     next();
   };
-};
+}
