@@ -15,10 +15,10 @@
     "dev": "node --env-file=.env --watch src/server.js"
   },
   "dependencies": {
-    "@babel/core": "^7.28.5",
+    "@babel/core": "^7.28.6",
     "@babel/plugin-transform-destructuring": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@zakodium/babel-plugin-transform-modules-amd": "^1.1.0",
+    "@babel/preset-env": "^7.28.6",
+    "@zakodium/babel-plugin-transform-modules-amd": "^1.1.1",
     "cors": "^2.8.5",
     "express": "^5.2.1",
     "http-proxy-middleware": "^3.0.5",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "eslint": "^9.39.2",
-    "eslint-config-cheminfo": "^17.0.0",
-    "prettier": "^3.7.4"
+    "eslint-config-cheminfo": "^17.1.0",
+    "prettier": "^3.8.0"
   }
 }
