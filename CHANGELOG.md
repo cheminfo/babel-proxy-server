@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/cheminfo/babel-proxy-server/compare/v2.1.0...v2.1.1) (2026-01-20)
+
+
+### Bug Fixes
+
+* correct code transformation ([#23](https://github.com/cheminfo/babel-proxy-server/issues/23)) ([e849e62](https://github.com/cheminfo/babel-proxy-server/commit/e849e6243166815a92fef17f99aea89d68ec1456))
+
 ## [2.1.0](https://github.com/cheminfo/babel-proxy-server/compare/v2.0.1...v2.1.0) (2026-01-09)
 
 
