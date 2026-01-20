@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "babel-proxy-server",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Proxy that converts js files with babel",
   "main": "src/server.js",
   "type": "module",
