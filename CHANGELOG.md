@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2](https://github.com/cheminfo/babel-proxy-server/compare/v2.1.1...v2.1.2) (2026-01-21)
+
+
+### Bug Fixes
+
+* support export star as namespace syntax ([#25](https://github.com/cheminfo/babel-proxy-server/issues/25)) ([84af0c0](https://github.com/cheminfo/babel-proxy-server/commit/84af0c0088580576b766d605490ba68f4779294d))
+
 ## [2.1.1](https://github.com/cheminfo/babel-proxy-server/compare/v2.1.0...v2.1.1) (2026-01-20)
 
 
