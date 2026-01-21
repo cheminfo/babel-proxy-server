@@ -70,6 +70,7 @@ function doBabel(req, res, txt) {
     ],
     plugins: [
       '@babel/plugin-transform-destructuring',
+      '@babel/plugin-transform-export-namespace-from',
       '@zakodium/babel-plugin-transform-modules-amd',
     ],
     minified: false,
