@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.3](https://github.com/cheminfo/babel-proxy-server/compare/v2.1.2...v2.1.3) (2026-01-26)
+
+
+### Bug Fixes
+
+* support import urls when transforming with babel ([c02da0a](https://github.com/cheminfo/babel-proxy-server/commit/c02da0ab30af4d479d8adbd4c57af2778d516988))
+
 ## [2.1.2](https://github.com/cheminfo/babel-proxy-server/compare/v2.1.1...v2.1.2) (2026-01-21)
 
 
