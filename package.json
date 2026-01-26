@@ -19,7 +19,7 @@
     "@babel/plugin-transform-destructuring": "^7.28.5",
     "@babel/plugin-transform-export-namespace-from": "^7.27.1",
     "@babel/preset-env": "^7.28.6",
-    "@zakodium/babel-plugin-transform-modules-amd": "^1.1.1",
+    "@zakodium/babel-plugin-transform-modules-amd": "^1.1.2",
     "cors": "^2.8.5",
     "express": "^5.2.1",
     "http-proxy-middleware": "^3.0.5",
