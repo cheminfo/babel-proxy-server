@@ -15,7 +15,7 @@
     "dev": "node --env-file=.env --watch src/server.js"
   },
   "dependencies": {
-    "@babel/core": "^7.28.6",
+    "@babel/core": "^7.29.6",
     "@babel/plugin-transform-destructuring": "^7.28.5",
     "@babel/plugin-transform-export-namespace-from": "^7.27.1",
     "@babel/preset-env": "^7.28.6",
